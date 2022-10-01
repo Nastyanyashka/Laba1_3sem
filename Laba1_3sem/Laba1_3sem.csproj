@@ -44,9 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company.cs" />
-    <Compile Include="Payment_per_hour.cs" />
-    <Compile Include="Payment_per_sale.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Worker_hour.cs" />
+    <Compile Include="Worker_sale.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
