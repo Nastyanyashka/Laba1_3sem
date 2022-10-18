@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Laba1_3sem
 {
-    class Company
+    public class Company
     {
         List<Worker_hour> Workers1 = new List<Worker_hour>();
         List<Worker_sale> Workers2 = new List<Worker_sale>();

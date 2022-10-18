@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Laba1_3sem
 {
-    class Worker_hour
+    public class Worker_hour : Worker
     {
-        string full_name;
-        bool gender;
         int hours_to_pay;
         int money_per_hour;
         int money_for_rework;
@@ -22,24 +20,17 @@ namespace Laba1_3sem
         /// <param name="money_per_hour"></param>
         /// <param name="money_for_rework"></param>
         public Worker_hour(string name, bool gender, int money_per_hour, int money_for_rework)
+            :base(name,gender)
         {
-            full_name = name;
-            this.gender = gender;
             this.money_per_hour = money_per_hour;
             this.money_for_rework = money_for_rework;
         }
 
-
-        public string Name => full_name;
-        public bool Gender => gender;
-
         public int Money_per_hour => money_per_hour;
-
         public int Norm_hours => norm_hours;
-
         public int Money_for_rework =>money_for_rework;
         public void Work(int hours) => hours_to_pay += hours;
-        public int calculate_salary()
+        public override double calculate_salary()
         {
             int salary;
             if(hours_to_pay > norm_hours)
