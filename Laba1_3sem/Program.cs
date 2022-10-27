@@ -17,9 +17,9 @@ namespace Laba1_3sem
             company.Add_worker_hour(new Worker_hour("dima", false, 10, 10));
             company.Add_worker_hour(new Worker_hour("sanya", false, 10, 10));
             company.Add_worker_hour(new Worker_hour("anton", false, 10, 10));
-            company.Delete_worker("stas");
+            company.Delete_worker("Аня");
             company.Add_worker_sale(new Worker_sale("stas", true, 1000, 1));
-            
+
 
         }
     }

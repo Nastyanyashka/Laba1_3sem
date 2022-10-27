@@ -22,6 +22,14 @@ namespace Laba1_3sem
         public Worker_hour(string name, bool gender, int money_per_hour, int money_for_rework)
             :base(name,gender)
         {
+            if (money_per_hour < 0)
+            {
+                throw new Exception("Зарплата отрицательная");
+            }
+            if (money_for_rework<0)
+            {
+                throw new Exception("Зарплата за переработку отрицательная");
+            }
             this.money_per_hour = money_per_hour;
             this.money_for_rework = money_for_rework;
         }

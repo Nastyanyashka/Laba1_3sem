@@ -17,8 +17,8 @@ namespace Laba1_3sem
 
         private int Binarysearch(List<Worker_hour> list, int n, string Name)
         {
-            int low = 1;
-             int high = n;
+            int low = 0;
+             int high = n-1;
             int mid;
             while (low<=high)
             {
@@ -74,6 +74,7 @@ namespace Laba1_3sem
                 Workers2.RemoveAt(num);
                 return;
             }
+            throw new Exception("Работник с таким именем не найден");
         }
 
         public double Simulate_work(int days)
@@ -89,7 +90,7 @@ namespace Laba1_3sem
                 }
                 for(int i = 0;i<Workers2.Count;i++)
                 {
-                    Workers2[i].Sale(sales.Next(10000, 100000));
+                    Workers2[i].Sale(sales.Next(500, 100000));
                 }
                 if(days_after_salary ==15)
                 {

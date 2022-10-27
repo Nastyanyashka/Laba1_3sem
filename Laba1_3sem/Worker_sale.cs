@@ -21,8 +21,16 @@ namespace Laba1_3sem
         public Worker_sale(string name, bool gender, int salary,double percentage)
             :base(name,gender)
         {
+            if(salary<0)
+            {
+                throw new Exception("Зарплата отрицательная");
+            }
+            if (percentage < 0 || percentage>100)
+            {
+                throw new Exception("Процент от продаж должен быть от 0 до 100");
+            }
             this.salary = salary;
-            this.percentage = percentage;
+            this.percentage = percentage/100;
         }
 
         public int Salary => salary;
