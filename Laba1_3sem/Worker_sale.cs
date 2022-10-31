@@ -36,7 +36,14 @@ namespace Laba1_3sem
         public int Salary => salary;
         public double Percentage => percentage;
 
-        public void Sale(int money) => money_for_sales += money;
+        public void Sale(int money)
+        {
+            if (money < 0)
+            {
+                throw new Exception("Нельзя за продажу получить отрицательное кол-во денег");
+            }
+            money_for_sales += money;
+        }
         public override double calculate_salary()
         {
             double salary = this.salary + (money_for_sales * percentage);

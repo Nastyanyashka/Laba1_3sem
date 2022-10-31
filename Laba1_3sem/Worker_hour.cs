@@ -37,7 +37,14 @@ namespace Laba1_3sem
         public int Money_per_hour => money_per_hour;
         public int Norm_hours => norm_hours;
         public int Money_for_rework =>money_for_rework;
-        public void Work(int hours) => hours_to_pay += hours;
+        public void Work(int hours)
+        {
+            if (hours < 0)
+            {
+                throw new Exception("Нельзя работать отрицательное кол-во часов");
+            }
+            hours_to_pay += hours;
+        }
         public override double calculate_salary()
         {
             int salary;

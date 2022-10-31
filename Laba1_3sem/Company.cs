@@ -8,12 +8,31 @@ namespace Laba1_3sem
 {
     public class Company
     {
-        List<Worker_hour> Workers1 = new List<Worker_hour>();
-        List<Worker_sale> Workers2 = new List<Worker_sale>();
+        List<Worker_hour> Workers_hour = new List<Worker_hour>();
+        List<Worker_sale> Workers_sale = new List<Worker_sale>();
         int days_after_salary = 0;
 
-        public void Add_worker_hour(Worker_hour worker1) => Workers1.Add(worker1);
-        public void Add_worker_sale(Worker_sale worker2) => Workers2.Add(worker2);
+        public void Add_worker_hour(Worker_hour worker1) => Workers_hour.Add(worker1);
+        public void Add_worker_sale(Worker_sale worker2) => Workers_sale.Add(worker2);
+
+        public List<Worker_hour> GetWorkersHour()
+        {
+            if (Workers_hour == null)
+            {
+                throw new Exception("Рабочих нет");
+            }
+            return Workers_hour;
+        }
+
+        public List<Worker_sale> GetWorkersSales()
+        {
+            if (Workers_sale == null)
+            {
+                throw new Exception("Рабочих нет");
+            }
+            return Workers_sale;
+        }
+
 
         private int Binarysearch(List<Worker_hour> list, int n, string Name)
         {
@@ -60,18 +79,18 @@ namespace Laba1_3sem
         public void Delete_worker(string full_name)
         {
             int num;
-            Workers1.Sort((x, y) => x.Name.CompareTo(y.Name));
-            num = Binarysearch(Workers1, Workers1.Count, full_name);
+            Workers_hour.Sort((x, y) => x.Name.CompareTo(y.Name));
+            num = Binarysearch(Workers_hour, Workers_hour.Count, full_name);
             if (num!=-1)
             {
-                Workers1.RemoveAt(num);
+                Workers_hour.RemoveAt(num);
                 return;
             }
-            Workers2.Sort((x, y) => x.Name.CompareTo(y.Name));
-            num = Binarysearch(Workers2, Workers2.Count, full_name);
+            Workers_sale.Sort((x, y) => x.Name.CompareTo(y.Name));
+            num = Binarysearch(Workers_sale, Workers_sale.Count, full_name);
             if(num!=-1)
             {
-                Workers2.RemoveAt(num);
+                Workers_sale.RemoveAt(num);
                 return;
             }
             throw new Exception("Работник с таким именем не найден");
@@ -79,29 +98,33 @@ namespace Laba1_3sem
 
         public double Simulate_work(int days)
         {
+            if (days< 0)
+            {
+                throw new Exception("Количество дней не может быть отрицательным");
+            }    
             double expenses = 0;
             Random hours = new Random();
             Random sales = new Random();
             for (; days > 0; days--, days_after_salary++)
             {
-                for (int i = 0; i < Workers1.Count; i++)
+                for (int i = 0; i < Workers_hour.Count; i++)
                 {
-                    Workers1[i].Work(hours.Next(1, 10));
+                    Workers_hour[i].Work(hours.Next(1, 10));
                 }
-                for(int i = 0;i<Workers2.Count;i++)
+                for(int i = 0;i<Workers_sale.Count;i++)
                 {
-                    Workers2[i].Sale(sales.Next(500, 100000));
+                    Workers_sale[i].Sale(sales.Next(500, 100000));
                 }
                 if(days_after_salary ==15)
                 {
                     days_after_salary = 0;
-                    for (int i = 0; i < Workers1.Count; i++)
+                    for (int i = 0; i < Workers_hour.Count; i++)
                     {
-                        expenses += Workers1[i].calculate_salary();
+                        expenses += Workers_hour[i].calculate_salary();
                     }
-                    for (int i = 0; i < Workers2.Count; i++)
+                    for (int i = 0; i < Workers_sale.Count; i++)
                     {
-                        expenses += Workers2[i].calculate_salary();
+                        expenses += Workers_sale[i].calculate_salary();
                     }  
                 }
 

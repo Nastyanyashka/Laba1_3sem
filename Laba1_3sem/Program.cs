@@ -10,17 +10,7 @@ namespace Laba1_3sem
     {
         static void Main(string[] args)
         {
-            Company company = new Company();
-            company.Add_worker_hour(new Worker_hour("tom", false, 10, 10));
-            company.Add_worker_hour(new Worker_hour("stas", false, 10, 10));
-            company.Add_worker_hour(new Worker_hour("gleb", false, 10, 10));
-            company.Add_worker_hour(new Worker_hour("dima", false, 10, 10));
-            company.Add_worker_hour(new Worker_hour("sanya", false, 10, 10));
-            company.Add_worker_hour(new Worker_hour("anton", false, 10, 10));
-            company.Delete_worker("Аня");
-            company.Add_worker_sale(new Worker_sale("stas", true, 1000, 1));
-
-
+          
         }
     }
 }
