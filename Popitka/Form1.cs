@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
 using Laba1_3sem;
 
 namespace Popitka
@@ -17,7 +20,44 @@ namespace Popitka
         public Form1()
         {
             InitializeComponent();
+            
+            //"stateOfListSale.json" "stateOfListHour.json"
         }
+        private async Task Deserealize_ListOfWorkerSale()
+        {
+            List<Worker_sale>? workers = null;
+            using (FileStream fileread_ListOfWorkers = new FileStream("stateOfListSale.json", FileMode.OpenOrCreate))
+            {
+                if(new FileInfo("stateOfListSale.json").Length ==0)
+                {
+                    return;
+                }
+               workers  = await JsonSerializer.DeserializeAsync<List<Worker_sale>>(fileread_ListOfWorkers);
+            }
+            foreach (Worker_sale w in workers)
+            {
+                company.Add_worker_sale(w);
+                listBox_Workers_Sale.Items.Add(w.Name);
+            }
+        }
+        private async Task Deserealize_ListOfWorkerHour()
+        {
+            List<Worker_hour>? workers = null;
+            using (FileStream fileread_ListOfWorkers = new FileStream("stateOfListHour.json", FileMode.OpenOrCreate))
+            {
+                if (new FileInfo("stateOfListHour.json").Length == 0)
+                {
+                    return;
+                }
+                workers = await JsonSerializer.DeserializeAsync<List<Worker_hour>>(fileread_ListOfWorkers);
+            }
+            foreach (Worker_hour w in workers)
+            {
+                company.Add_worker_hour(w);
+                listBox_Workers_Hour.Items.Add(w.Name);
+            }
+        }
+
 
         private void button_add_Worker_Sale_Click(object sender, EventArgs e)
         {
@@ -41,7 +81,7 @@ namespace Popitka
             {
                 MessageBox.Show($"Ошибка : {ex.Message}");
             }
-           
+            
 
         }
 
@@ -76,7 +116,6 @@ namespace Popitka
             label10.Text = "Затраты за введенное кол-во дней: " +
                 company.Simulate_work(Convert.ToInt32(textBox_modelWork.Text)).ToString();
         }
-
         private void button_DeleteWorker_Click(object sender, EventArgs e)
         {
             try
@@ -90,6 +129,25 @@ namespace Popitka
             }
             listBox_Workers_Sale.Items.Remove(textBox_DeleteWorker.Text);
             listBox_Workers_Hour.Items.Remove(textBox_DeleteWorker.Text);
+        }
+
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using(FileStream filewrite_ListOfWorkersSale = new FileStream("stateOfListSale.json", FileMode.Truncate))
+            {
+                await JsonSerializer.SerializeAsync<List<Worker_sale>>(filewrite_ListOfWorkersSale,company.GetWorkersSales());
+            }
+
+            using (FileStream filewrite_ListOfWorkersHour = new FileStream("stateOfListHour.json", FileMode.Truncate))
+            {
+                await JsonSerializer.SerializeAsync<List<Worker_hour>>(filewrite_ListOfWorkersHour, company.GetWorkersHour());
+            }
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await Deserealize_ListOfWorkerHour();
+            await Deserealize_ListOfWorkerSale();
         }
     }
 }

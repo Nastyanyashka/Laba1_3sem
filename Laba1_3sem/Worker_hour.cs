@@ -11,7 +11,7 @@ namespace Laba1_3sem
         int hours_to_pay;
         int money_per_hour;
         int money_for_rework;
-        const int norm_hours = 6*15;
+        int norm_hours = 6*15;
         /// <summary>
         /// 
         /// </summary>
@@ -33,10 +33,41 @@ namespace Laba1_3sem
             this.money_per_hour = money_per_hour;
             this.money_for_rework = money_for_rework;
         }
+        public Worker_hour(){ }
 
-        public int Money_per_hour => money_per_hour;
-        public int Norm_hours => norm_hours;
-        public int Money_for_rework =>money_for_rework;
+        public int Money_per_hour {
+            get
+            {return money_per_hour;}
+             set
+            {
+                if (money_per_hour < 0)
+                {
+                    throw new Exception("Зарплата отрицательная");
+                }
+                money_per_hour = value;
+            }
+        }
+        public int Norm_hours
+        {
+            get { return norm_hours; }
+             set
+            {
+                if (value < 0)
+                {
+                    throw new Exception("Норма часов не может быть отрицательной");
+                }
+            }
+        }
+        public int Money_for_rework
+        {
+            get { return money_for_rework; }
+             set {
+                if (value < 0)
+                {
+                    throw new Exception("Зарплата за переработку отрицательная");
+                }
+                money_for_rework = value; }
+        }
         public void Work(int hours)
         {
             if (hours < 0)

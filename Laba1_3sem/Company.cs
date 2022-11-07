@@ -57,8 +57,8 @@ namespace Laba1_3sem
         }
         private int Binarysearch(List<Worker_sale> list, int n, string Name)
         {
-            int low = 1;
-            int high = n;
+            int low = 0;
+            int high = n-1;
             int mid;
             while (low <= high)
             {

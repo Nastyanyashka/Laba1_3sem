@@ -32,9 +32,30 @@ namespace Laba1_3sem
             this.salary = salary;
             this.percentage = percentage/100;
         }
+        public Worker_sale() { }
 
-        public int Salary => salary;
-        public double Percentage => percentage;
+        public int Salary { get { return salary; }
+             set
+            {
+                if (value < 0)
+                {
+                    throw new Exception("Зарплата отрицательная");
+                }
+                salary = value;
+            }
+        }
+        public double Percentage
+        {
+            get { return percentage; }
+             set
+            {
+                if (value < 0 || value > 100)
+                {
+                    throw new Exception("Процент от продаж должен быть от 0 до 100");
+                }
+                percentage = value;
+            }
+        }
 
         public void Sale(int money)
         {
